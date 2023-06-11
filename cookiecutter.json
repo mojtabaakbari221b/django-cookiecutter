@@ -1,5 +1,6 @@
 {
     "project_name": "Cook It",
     "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
-    "docker_registry_url" : "please insert docker registry url for ci cd pipelines .."
+    "docker_registry_url" : "please insert docker registry url for ci cd pipelines ..",
+    "username_type" : "email"
 }
