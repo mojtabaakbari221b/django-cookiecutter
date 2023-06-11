@@ -9,7 +9,7 @@ from {{ cookiecutter.project_slug }}.users.managers import UserManager
 
 class User(AbstractUser):
     """
-    Default custom user model for {{cookiecutter.{{ cookiecutter.project_slug }}}}.
+    Default custom user model for {{ cookiecutter.project_slug }}.
     If adding fields that need to be filled at user signup,
     check forms.SignupForm and forms.SocialSignupForms accordingly.
     """
