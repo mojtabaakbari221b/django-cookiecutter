@@ -66,7 +66,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = '{{ cookiecutter.project_slug }}.wsgi.application'
+WSGI_APPLICATION = 'configs.wsgi.application'
 
 APPEND_SLASH = True
 
