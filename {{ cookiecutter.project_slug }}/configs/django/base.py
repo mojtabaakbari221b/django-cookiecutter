@@ -120,7 +120,7 @@ USE_TZ = True
 LOCALE_PATHS = [
     os.path.join(
         BASE_DIR,
-        'projcet_name',
+        '{{ cookiecutter.project_slug }}',
         'locale',
     ),
 ]
@@ -132,14 +132,14 @@ LOCALE_PATHS = [
 
 STATIC_ROOT = os.path.join(
     BASE_DIR,
-    'projcet_name',
+    '{{ cookiecutter.project_slug }}',
     'static',
 )
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(
     BASE_DIR,
-    'projcet_name',
+    '{{ cookiecutter.project_slug }}',
     'media',
 )
 MEDIA_URL = f'{env("MEDIA_HOST")}/media/'

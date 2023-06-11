@@ -1,5 +1,5 @@
 FROM python:3.9
-ENV HOME=/opt/projcet_name_celery/
+ENV HOME=/opt/{{ cookiecutter.project_slug }}_celery/
 
 # Set working directory
 RUN mkdir -p $HOME
@@ -11,4 +11,4 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements/celery.txt
 
 COPY configs $HOME/configs
-# COPY projcet_name $HOME/projcet_name
+# COPY {{ cookiecutter.project_slug }} $HOME/{{ cookiecutter.project_slug }}

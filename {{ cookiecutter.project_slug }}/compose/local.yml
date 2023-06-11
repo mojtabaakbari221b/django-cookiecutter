@@ -2,48 +2,48 @@ version: "3"
 
 services:
 
-  projcet_name_postgresql:
+  {{ cookiecutter.project_slug }}_postgresql:
     image:
       postgres:14
     volumes:
-      - projcet_name_postgresql_volume:/var/lib/postgresql/data
+      - {{ cookiecutter.project_slug }}_postgresql_volume:/var/lib/postgresql/data
     restart: always
     env_file: ../.envs/.env
     networks:
-      - projcet_name_postgres_network
+      - {{ cookiecutter.project_slug }}_postgres_network
   
-  projcet_name:
+  {{ cookiecutter.project_slug }}:
     build:
       context: ..
-      dockerfile: docker/projcet_name/Dockerfile
-    entrypoint: ["/bin/sh", "/opt/projcet_name/development.sh"]
+      dockerfile: docker/{{ cookiecutter.project_slug }}/Dockerfile
+    entrypoint: ["/bin/sh", "/opt/{{ cookiecutter.project_slug }}/development.sh"]
     volumes:
-      - projcet_name_static_volume:/opt/projcet_name/projcet_name/static
-      - projcet_name_media_volume:/opt/projcet_name/projcet_name/media
+      - {{ cookiecutter.project_slug }}_static_volume:/opt/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}/static
+      - {{ cookiecutter.project_slug }}_media_volume:/opt/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}/media
     restart: on-failure
     ports:
       - "127.0.0.1:8000:8000"
     networks:
-      - projcet_name_postgres_network
-      - projcet_name_redis_network
+      - {{ cookiecutter.project_slug }}_postgres_network
+      - {{ cookiecutter.project_slug }}_redis_network
     depends_on:
-      - projcet_name_postgresql
+      - {{ cookiecutter.project_slug }}_postgresql
 
 volumes:
-  projcet_name_postgresql_volume:
+  {{ cookiecutter.project_slug }}_postgresql_volume:
     driver: local
-    name: projcet_name_postgresql_volume
-  projcet_name_static_volume:
+    name: {{ cookiecutter.project_slug }}_postgresql_volume
+  {{ cookiecutter.project_slug }}_static_volume:
     driver: local
-    name: projcet_name_static_volume
-  projcet_name_media_volume:
+    name: {{ cookiecutter.project_slug }}_static_volume
+  {{ cookiecutter.project_slug }}_media_volume:
     driver: local
-    name: projcet_name_media_volume
+    name: {{ cookiecutter.project_slug }}_media_volume
 
 networks:
-  projcet_name_postgres_network:
+  {{ cookiecutter.project_slug }}_postgres_network:
     driver: bridge
-    name: projcet_name_postgres_network
-  projcet_name_redis_network:
+    name: {{ cookiecutter.project_slug }}_postgres_network
+  {{ cookiecutter.project_slug }}_redis_network:
     driver: bridge
-    name: projcet_name_redis_network
+    name: {{ cookiecutter.project_slug }}_redis_network

@@ -1,10 +1,10 @@
 FROM python:3.9
-LABEL MAINTAINER="projcet_name | https://projcet_name.com"
+LABEL MAINTAINER="{{ cookiecutter.project_slug }} | https://{{ cookiecutter.project_slug }}.com"
 LABEL VERSION="0.0.0.1"
 
 ENV PYTHONUNBUFFERED 1
 
-ENV HOME=/opt/projcet_name/
+ENV HOME=/opt/{{ cookiecutter.project_slug }}/
 
 # Set working directory
 RUN mkdir -p $HOME
@@ -17,5 +17,5 @@ RUN pip install -r base.txt
 
 COPY configs $HOME/configs
 COPY manage.py $HOME
-COPY projcet_name $HOME/projcet_name
-COPY docker/projcet_name/entrypoints/* $HOME
+COPY {{ cookiecutter.project_slug }} $HOME/{{ cookiecutter.project_slug }}
+COPY docker/{{ cookiecutter.project_slug }}/entrypoints/* $HOME
