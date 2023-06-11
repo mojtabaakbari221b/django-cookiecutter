@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+
+  {{ cookiecutter.project_slug }}_postgresql:
+    image:
+      postgres:14
+    volumes:
+      - build_{{ cookiecutter.project_slug }}_postgresql_volume:/var/lib/postgresql/data
+    restart: always
+    env_file: ../.envs/.env
+    networks:
+      - build_{{ cookiecutter.project_slug }}_postgres_network
+  
+  {{ cookiecutter.project_slug }}:
+    image: 
+      registry.{{ cookiecutter.project_slug }}.com/{{ cookiecutter.project_slug }}:${BUILD_ID}
+    tty: true
+    entrypoint: ["/bin/sh", "/opt/{{ cookiecutter.project_slug }}/build.sh"]
+    restart: on-failure
+    networks:
+      - build_{{ cookiecutter.project_slug }}_postgres_network
+      - build_{{ cookiecutter.project_slug }}_redis_network
+    depends_on:
+      - {{ cookiecutter.project_slug }}_postgresql
+
+volumes:
+  build_{{ cookiecutter.project_slug }}_postgresql_volume:
+    driver: local
+    name: build_{{ cookiecutter.project_slug }}_postgresql_volume
+
+networks:
+  build_{{ cookiecutter.project_slug }}_postgres_network:
+    driver: bridge
+    name: build_{{ cookiecutter.project_slug }}_postgres_network
+  build_{{ cookiecutter.project_slug }}_redis_network:
+    driver: bridge
+    name: build_{{ cookiecutter.project_slug }}_redis_network

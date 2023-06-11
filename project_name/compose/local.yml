@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+
+  projcet_name_postgresql:
+    image:
+      postgres:14
+    volumes:
+      - projcet_name_postgresql_volume:/var/lib/postgresql/data
+    restart: always
+    env_file: ../.envs/.env
+    networks:
+      - projcet_name_postgres_network
+  
+  projcet_name:
+    build:
+      context: ..
+      dockerfile: docker/projcet_name/Dockerfile
+    entrypoint: ["/bin/sh", "/opt/projcet_name/development.sh"]
+    volumes:
+      - projcet_name_static_volume:/opt/projcet_name/projcet_name/static
+      - projcet_name_media_volume:/opt/projcet_name/projcet_name/media
+    restart: on-failure
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks:
+      - projcet_name_postgres_network
+      - projcet_name_redis_network
+    depends_on:
+      - projcet_name_postgresql
+
+volumes:
+  projcet_name_postgresql_volume:
+    driver: local
+    name: projcet_name_postgresql_volume
+  projcet_name_static_volume:
+    driver: local
+    name: projcet_name_static_volume
+  projcet_name_media_volume:
+    driver: local
+    name: projcet_name_media_volume
+
+networks:
+  projcet_name_postgres_network:
+    driver: bridge
+    name: projcet_name_postgres_network
+  projcet_name_redis_network:
+    driver: bridge
+    name: projcet_name_redis_network
