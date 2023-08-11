@@ -73,6 +73,7 @@ class UserAdmin(auth_admin.UserAdmin):
     search_fields = [
         "name",
     ]
+    
     {%- if cookiecutter.username_type == "email" %}
     ordering = [
         "id",
