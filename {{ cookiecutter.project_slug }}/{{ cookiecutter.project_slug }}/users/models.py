@@ -4,10 +4,11 @@ from django.utils.translation import gettext_lazy as _
 {%- if cookiecutter.username_type == "email" %}
 
 from {{ cookiecutter.project_slug }}.users.managers import UserManager
+from {{ cookiecutter.project_slug }}.utils.models import BaseModel
 {%- endif %}
 
 
-class User(AbstractUser):
+class User(BaseModel, AbstractUser):
     """
     Default custom user model for {{ cookiecutter.project_slug }}.
     If adding fields that need to be filled at user signup,
