@@ -15,6 +15,7 @@ ADD requirements/base.txt $HOME
 RUN pip install --upgrade pip
 RUN pip install -r base.txt
 
+COPY .envs $HOME/.envs
 COPY configs $HOME/configs
 COPY manage.py $HOME
 COPY {{ cookiecutter.project_slug }} $HOME/{{ cookiecutter.project_slug }}
