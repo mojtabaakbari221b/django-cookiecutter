@@ -16,7 +16,7 @@ services:
     build:
       context: ..
       dockerfile: docker/{{ cookiecutter.project_slug }}/Dockerfile
-    entrypoint: ["/bin/sh", "/opt/{{ cookiecutter.project_slug }}/development.sh"]
+    entrypoint: ["/bin/sh", "/opt/{{ cookiecutter.project_slug }}/build.sh"]
     volumes:
       - {{ cookiecutter.project_slug }}_static_volume:/opt/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}/static
       - {{ cookiecutter.project_slug }}_media_volume:/opt/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}/media
